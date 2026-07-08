@@ -38,6 +38,10 @@
     .gcs-testi { column-count: 2 !important; }
     .gcs-bookmin { grid-template-columns: 1fr !important; gap: 34px !important; }
   }
+  @media (max-width: 640px) {
+    .gcs-bookmin { padding: 32px 22px !important; }
+    .gcs-phone { width: 100% !important; max-width: 300px !important; }
+  }
   @media (max-width: 860px) {
     .gcs-herowrap { min-height: auto !important; }
     .gcs-hero-bg, .gcs-hero-scrim { display: none !important; }
@@ -71,6 +75,7 @@
     .gcs-testi { column-count: 1 !important; }
     .gcs-bookmin { padding: 34px 22px !important; border-radius: 24px !important; gap: 30px !important; overflow: hidden !important; }
     .gcs-bookmin > div:last-child > div { width: min(100%, 310px) !important; border-radius: 28px !important; }
+    .gcs-finalcta { padding: 46px 22px !important; border-radius: 24px !important; }
     .gcs-header-cta { padding: 10px 15px !important; font-size: 13px !important; }
     .gcs-price-head > div, .gcs-price-row > div { padding-left: 12px !important; padding-right: 12px !important; }
   }
@@ -349,8 +354,8 @@
         <div style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:#0e3a46"><span style="color:#0e7ea8">✓</span> Send on WhatsApp</div>
       </div>
     </div>
-    <div style="display:flex;justify-content:center">
-      <div style="width:300px;background:#0e3a46;border-radius:34px;padding:12px;box-shadow:0 30px 60px rgba(14,58,70,0.3)">
+    <div style="display:flex;justify-content:center;min-width:0">
+      <div class="gcs-phone" style="width:300px;max-width:100%;background:#0e3a46;border-radius:34px;padding:12px;box-shadow:0 30px 60px rgba(14,58,70,0.3)">
         <div style="background:#eaf3f1;border-radius:24px;overflow:hidden">
           <div style="display:flex;align-items:center;gap:10px;background:#0e3a46;padding:12px 14px">
             <img src="assets/logo.jpg" alt="Golden Cleaning Services" style="width:34px;height:34px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,0.25)">
@@ -373,7 +378,7 @@
 
 <!-- ============ FINAL CTA ============ -->
 <section style="max-width:1180px;margin:0 auto;padding:80px 24px">
-  <div style="position:relative;background:#0e3a46;border-radius:32px;padding:64px 48px;overflow:hidden;text-align:center">
+  <div class="gcs-finalcta" style="position:relative;background:#0e3a46;border-radius:32px;padding:64px 48px;overflow:hidden;text-align:center">
     <div style="position:absolute;top:-100px;right:-60px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(244,196,48,0.22),transparent 70%)"></div>
     <div style="position:absolute;bottom:-120px;left:-60px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(59,167,214,0.22),transparent 70%)"></div>
     <div style="position:relative">
