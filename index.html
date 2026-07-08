@@ -15,8 +15,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Mulish:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body { font-family: 'Mulish', system-ui, sans-serif; color: #2c3f44; background: #ffffff; -webkit-font-smoothing: antialiased; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
+  body { font-family: 'Mulish', system-ui, sans-serif; color: #2c3f44; background: #ffffff; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
   a { color: #0e7ea8; text-decoration: none; }
   a:hover { color: #0c5f80; }
   h1,h2,h3,h4 { font-family: 'Poppins', sans-serif; color: #0e3a46; line-height: 1.12; }
@@ -60,8 +60,7 @@
   }
   @media (max-width: 860px) {
     .gcs-herowrap { min-height: auto !important; }
-    .gcs-hero-bg, .gcs-hero-scrim, .gcs-hero-bottom-fade { display: none !important; }
-    .gcs-hero-img { display: block !important; }
+    .gcs-hero-bg, .gcs-hero-scrim, .gcs-hero-bottom-fade, .gcs-hero-img { display: none !important; }
     .gcs-hero-text { max-width: 640px !important; }
   }
   /* ---- phones ---- */
@@ -71,7 +70,6 @@
     .gcs-hero { padding: 30px 20px 44px !important; }
     .gcs-hero h1 { font-size: 34px !important; letter-spacing: -0.5px !important; }
     .gcs-hero p { font-size: 16px !important; }
-    .gcs-hero-img { aspect-ratio: 4 / 3 !important; object-fit: cover !important; object-position: center top !important; border-radius: 18px !important; margin-bottom: 26px !important; }
     .gcs-hero-stats { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 18px 0 !important; }
     .gcs-hero-stat { padding: 0 18px 0 0 !important; }
     .gcs-hero-stat:last-child { grid-column: 1 / -1 !important; border-top: 1px solid #d7e3e7 !important; padding-top: 18px !important; }
@@ -85,10 +83,7 @@
     .gcs-trust { grid-template-columns: 1fr !important; }
     .gcs-conf { grid-template-columns: 1fr 1fr !important; }
     .gcs-gallery { grid-template-columns: 1fr 1fr !important; grid-auto-rows: auto !important; gap: 12px !important; }
-    .gcs-gallery > * { grid-row: auto !important; }
-    .gcs-gallery > *:nth-child(1), .gcs-gallery > *:nth-child(4) { grid-column: 1 / -1 !important; aspect-ratio: 16 / 10 !important; }
-    .gcs-gallery > *:nth-child(2), .gcs-gallery > *:nth-child(3),
-    .gcs-gallery > *:nth-child(5), .gcs-gallery > *:nth-child(6) { aspect-ratio: 1 / 1 !important; }
+    .gcs-gallery > * { grid-column: auto !important; grid-row: auto !important; aspect-ratio: 1 / 1 !important; }
     .gcs-gallery > a { grid-column: 1 / -1 !important; aspect-ratio: auto !important; min-height: 170px !important; padding: 20px !important; }
     .gcs-footer { grid-template-columns: 1fr !important; gap: 30px !important; }
     .gcs-testi { column-count: 1 !important; }
@@ -108,9 +103,10 @@
     .gcs-price-head > div, .gcs-price-row > div { padding-left: 9px !important; padding-right: 9px !important; font-size: 14px !important; }
   }
   .gcs-chat-popup { width: 378px; }
+  .gcs-fab { right: max(24px, env(safe-area-inset-right)) !important; }
   @media (max-width: 620px) {
-    .gcs-chat-popup { right: 3vw !important; left: 3vw !important; width: auto !important; bottom: 12px !important; height: 78vh !important; max-height: calc(100vh - 24px) !important; }
-    .gcs-fab { right: 14px !important; bottom: max(14px, env(safe-area-inset-bottom)) !important; padding: 10px 15px 10px 10px !important; gap: 8px !important; font-size: 13.5px !important; box-shadow: 0 10px 24px rgba(37,211,102,0.36) !important; }
+    .gcs-chat-popup { right: max(3vw, env(safe-area-inset-right)) !important; left: max(3vw, env(safe-area-inset-left)) !important; width: auto !important; bottom: 12px !important; height: 78vh !important; max-height: calc(100vh - 24px) !important; }
+    .gcs-fab { right: max(14px, env(safe-area-inset-right)) !important; bottom: max(14px, env(safe-area-inset-bottom)) !important; padding: 10px 15px 10px 10px !important; gap: 8px !important; font-size: 13.5px !important; box-shadow: 0 10px 24px rgba(37,211,102,0.36) !important; }
     .gcs-fab span { width: 26px !important; height: 26px !important; }
   }
 </style>
@@ -173,7 +169,6 @@
         <a href="https://GCSkuching.wasap.my" target="_blank" style="display:inline-flex;align-items:center;gap:10px;background:#f4c430;color:#0e3a46;padding:15px 28px;border-radius:999px;font-weight:800;font-size:16px;box-shadow:0 10px 24px rgba(244,196,48,0.4)" style-hover="background:#ffd645;transform:translateY(-2px)">Get Free Quote →</a>
         <a href="#services" style="display:inline-flex;align-items:center;gap:10px;background:#fff;color:#0e3a46;padding:15px 28px;border-radius:999px;font-weight:700;font-size:16px;border:1.5px solid #dbe7ea" style-hover="border-color:#0e7ea8;color:#0e7ea8">View Services</a>
       </div>
-      <img class="gcs-hero-img" src="assets/hero.png" alt="Golden Cleaning Services team" style="display:none;width:100%;border-radius:20px;margin-bottom:30px;box-shadow:0 16px 40px rgba(14,58,70,0.18)">
       <div class="gcs-hero-stats" style="display:flex;gap:30px;flex-wrap:wrap">
         <div class="gcs-hero-stat"><div style="font-family:'Poppins';font-weight:800;font-size:26px;color:#0e3a46">6+</div><div style="font-size:13px;color:#6a7b80;font-weight:600">Space types served</div></div>
         <div class="gcs-hero-sep" style="width:1px;background:#d7e3e7"></div>
