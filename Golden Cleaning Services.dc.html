@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Mulish:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Mulish', system-ui, sans-serif; color: #2c3f44; background: #ffffff; -webkit-font-smoothing: antialiased; }
+  a { color: #0e7ea8; text-decoration: none; }
+  a:hover { color: #0c5f80; }
+  h1,h2,h3,h4 { font-family: 'Poppins', sans-serif; color: #0e3a46; line-height: 1.12; }
+  ::selection { background: #f4c430; color: #0e3a46; }
+  @keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes gcsPop { from { opacity:0; transform:translateY(18px) scale(0.96); } to { opacity:1; transform:translateY(0) scale(1); } }
+  /* ---- tablet / small laptop ---- */
+  @media (max-width: 1024px) {
+    .gcs-nav { display: none !important; }
+    .gcs-burger { display: inline-flex !important; }
+    .gcs-hero { grid-template-columns: 1fr !important; gap: 40px !important; }
+    .gcs-why { grid-template-columns: 1fr !important; gap: 40px !important; }
+    .gcs-trust { grid-template-columns: 1fr 1fr !important; }
+    .gcs-cards { grid-template-columns: 1fr 1fr !important; }
+    .gcs-steps { grid-template-columns: 1fr 1fr !important; }
+    .gcs-conf { grid-template-columns: 1fr 1fr !important; }
+    .gcs-footer { grid-template-columns: 1fr 1fr !important; }
+    .gcs-testi { column-count: 2 !important; }
+    .gcs-bookmin { grid-template-columns: 1fr !important; gap: 34px !important; }
+  }
+  @media (max-width: 860px) {
+    .gcs-herowrap { min-height: auto !important; }
+    .gcs-hero-bg, .gcs-hero-scrim { display: none !important; }
+    .gcs-hero-img { display: block !important; }
+    .gcs-hero-text { max-width: 640px !important; }
+  }
+  /* ---- phones ---- */
+  @media (max-width: 620px) {
+    .gcs-sec { padding-top: 56px !important; padding-bottom: 56px !important; }
+    .gcs-hero { padding: 40px 20px !important; }
+    .gcs-hero h1 { font-size: 34px !important; letter-spacing: -0.5px !important; }
+    .gcs-hero p { font-size: 16px !important; }
+    .gcs-h2 { font-size: 28px !important; }
+    .gcs-cta-row { flex-direction: column !important; align-items: stretch !important; }
+    .gcs-cta-row > a, .gcs-cta-row > button { justify-content: center !important; width: 100% !important; }
+    .gcs-cards { grid-template-columns: 1fr !important; }
+    .gcs-why-grid { grid-template-columns: 1fr !important; }
+    .gcs-steps { grid-template-columns: 1fr !important; }
+    .gcs-trust { grid-template-columns: 1fr !important; }
+    .gcs-conf { grid-template-columns: 1fr 1fr !important; }
+    .gcs-gallery { grid-template-columns: 1fr 1fr !important; }
+    .gcs-footer { grid-template-columns: 1fr !important; gap: 30px !important; }
+    .gcs-testi { column-count: 1 !important; }
+    .gcs-header-cta { padding: 10px 15px !important; font-size: 13px !important; }
+    .gcs-price-head > div, .gcs-price-row > div { padding-left: 12px !important; padding-right: 12px !important; }
+  }
+  @media (max-width: 400px) {
+    .gcs-hero h1 { font-size: 30px !important; }
+    .gcs-h2 { font-size: 25px !important; }
+    .gcs-header-cta { display: none !important; }
+    .gcs-conf { grid-template-columns: 1fr !important; }
+    .gcs-gallery { grid-template-columns: 1fr !important; }
+    .gcs-price-head > div, .gcs-price-row > div { padding-left: 9px !important; padding-right: 9px !important; font-size: 14px !important; }
+  }
+  .gcs-chat-popup { width: 378px; }
+  @media (max-width: 620px) {
+    .gcs-chat-popup { right: 3vw !important; left: 3vw !important; width: auto !important; bottom: 12px !important; height: 78vh !important; max-height: calc(100vh - 24px) !important; }
+    .gcs-fab { right: 16px !important; bottom: 16px !important; }
+  }
+</style>
+<script src="assets/image-slot.js"></script>
+</helmet>
+
+<div style="max-width:100%;overflow-x:hidden">
+
+<!-- ============ HEADER ============ -->
+<header style="position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.88);backdrop-filter:blur(12px);border-bottom:1px solid #e8eff1">
+  <div style="max-width:1180px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px">
+    <a href="#top" style="display:flex;align-items:center;gap:12px">
+      <img src="assets/logo.jpg" alt="Golden Cleaning Services" style="width:48px;height:48px;border-radius:12px;object-fit:cover;box-shadow:0 4px 14px rgba(14,58,70,0.18)">
+      <span style="font-family:'Poppins',sans-serif;font-weight:700;font-size:17px;color:#0e3a46;line-height:1.1">Golden Cleaning<br><span style="font-weight:600;font-size:13px;color:#e3ad0c;letter-spacing:1.5px">SERVICES</span></span>
+    </a>
+    <nav style="display:flex;align-items:center;gap:30px;font-weight:600;font-size:15px" class="gcs-nav">
+      <a href="#services" style="color:#2c3f44">Services</a>
+      <a href="#why" style="color:#2c3f44">Why Us</a>
+      <a href="#pricing" style="color:#2c3f44">Pricing</a>
+      <a href="#process" style="color:#2c3f44">How It Works</a>
+      <a href="#gallery" style="color:#2c3f44">Gallery</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:12px">
+      <a href="https://GCSkuching.wasap.my" target="_blank" class="gcs-header-cta" style="display:inline-flex;align-items:center;gap:8px;background:#0e3a46;color:#fff;padding:11px 20px;border-radius:999px;font-weight:700;font-size:14px;box-shadow:0 6px 18px rgba(14,58,70,0.22)" style-hover="background:#134e5e;transform:translateY(-1px)">
+        <span style="width:8px;height:8px;border-radius:50%;background:#f4c430;display:inline-block"></span>Get Free Quote
+      </a>
+      <button onClick="{{ toggleMenu }}" aria-label="Menu" class="gcs-burger" style="display:none;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;border:1px solid #e3edf0;background:#fff;cursor:pointer;flex-shrink:0">
+        <span style="display:flex;flex-direction:column;gap:4px"><span style="width:20px;height:2.5px;background:#0e3a46;border-radius:2px"></span><span style="width:20px;height:2.5px;background:#0e3a46;border-radius:2px"></span><span style="width:20px;height:2.5px;background:#0e3a46;border-radius:2px"></span></span>
+      </button>
+    </div>
+  </div>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div class="gcs-mobile-menu" style="border-top:1px solid #e8eff1;background:#fff;padding:8px 20px 18px;animation:fadeUp .2s ease both">
+      <nav style="display:flex;flex-direction:column">
+        <a onClick="{{ closeMenu }}" href="#services" style="padding:14px 4px;font-weight:700;font-size:16px;color:#2c3f44;border-bottom:1px solid #f0f5f6">Services</a>
+        <a onClick="{{ closeMenu }}" href="#why" style="padding:14px 4px;font-weight:700;font-size:16px;color:#2c3f44;border-bottom:1px solid #f0f5f6">Why Us</a>
+        <a onClick="{{ closeMenu }}" href="#pricing" style="padding:14px 4px;font-weight:700;font-size:16px;color:#2c3f44;border-bottom:1px solid #f0f5f6">Pricing</a>
+        <a onClick="{{ closeMenu }}" href="#process" style="padding:14px 4px;font-weight:700;font-size:16px;color:#2c3f44;border-bottom:1px solid #f0f5f6">How It Works</a>
+        <a onClick="{{ closeMenu }}" href="#gallery" style="padding:14px 4px;font-weight:700;font-size:16px;color:#2c3f44">Gallery</a>
+      </nav>
+    </div>
+  </sc-if>
+</header>
+
+<div id="top"></div>
+
+<!-- ============ HERO ============ -->
+<section class="gcs-herowrap" style="position:relative;overflow:hidden;background:#fff;min-height:660px;display:flex;align-items:center">
+  <div class="gcs-hero-bg" style="position:absolute;inset:0;background-image:url('assets/hero.png');background-repeat:no-repeat;background-position:right top;background-size:contain"></div>
+  <div class="gcs-hero-scrim" style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,0.98) 0%,rgba(255,255,255,0.95) 34%,rgba(255,255,255,0.55) 52%,rgba(255,255,255,0) 70%)"></div>
+  <div style="position:relative;width:100%;max-width:1180px;margin:0 auto;padding:64px 24px" class="gcs-hero">
+    <div class="gcs-hero-text" style="max-width:560px;animation:fadeUp 0.7s ease both">
+      <div style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid #e3edf0;padding:7px 15px;border-radius:999px;font-weight:700;font-size:13px;color:#0e7ea8;box-shadow:0 4px 14px rgba(14,58,70,0.06);margin-bottom:22px">
+        <span style="width:7px;height:7px;border-radius:50%;background:#39b54a"></span>Based in Kuching, Sarawak · Trusted Local Cleaners
+      </div>
+      <h1 style="font-size:54px;font-weight:800;letter-spacing:-1px">A spotless space,<br><span style="color:#0e7ea8">without the</span> <span style="position:relative;white-space:nowrap">hassle.<span style="position:absolute;left:0;right:0;bottom:4px;height:12px;background:#f4c430;opacity:0.5;z-index:-1;border-radius:4px"></span></span></h1>
+      <p style="font-size:18px;line-height:1.6;color:#3f5359;margin:22px 0 30px;max-width:500px">Professional cleaning for homes, offices, shops, cafés and post-renovation spaces across Kuching. Reliable teams, quality results, and some of the best prices in town. Tools and detergents provided free on request.</p>
+      <div class="gcs-cta-row" style="display:flex;flex-wrap:wrap;gap:14px;margin-bottom:34px">
+        <a href="https://GCSkuching.wasap.my" target="_blank" style="display:inline-flex;align-items:center;gap:10px;background:#f4c430;color:#0e3a46;padding:15px 28px;border-radius:999px;font-weight:800;font-size:16px;box-shadow:0 10px 24px rgba(244,196,48,0.4)" style-hover="background:#ffd645;transform:translateY(-2px)">Get Free Quote →</a>
+        <a href="#services" style="display:inline-flex;align-items:center;gap:10px;background:#fff;color:#0e3a46;padding:15px 28px;border-radius:999px;font-weight:700;font-size:16px;border:1.5px solid #dbe7ea" style-hover="border-color:#0e7ea8;color:#0e7ea8">View Services</a>
+      </div>
+      <img class="gcs-hero-img" src="assets/hero.png" alt="Golden Cleaning Services team" style="display:none;width:100%;border-radius:20px;margin-bottom:30px;box-shadow:0 16px 40px rgba(14,58,70,0.18)">
+      <div style="display:flex;gap:30px;flex-wrap:wrap">
+        <div><div style="font-family:'Poppins';font-weight:800;font-size:26px;color:#0e3a46">6+</div><div style="font-size:13px;color:#6a7b80;font-weight:600">Space types served</div></div>
+        <div style="width:1px;background:#d7e3e7"></div>
+        <div><div style="font-family:'Poppins';font-weight:800;font-size:26px;color:#0e3a46">8AM–7PM</div><div style="font-size:13px;color:#6a7b80;font-weight:600">Open daily</div></div>
+        <div style="width:1px;background:#d7e3e7"></div>
+        <div><div style="font-family:'Poppins';font-weight:800;font-size:26px;color:#0e3a46">From RM50</div><div style="font-size:13px;color:#6a7b80;font-weight:600">Per session</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRUST BAR ============ -->
+<section style="background:#0e3a46;color:#fff">
+  <div style="max-width:1180px;margin:0 auto;padding:26px 24px;display:grid;grid-template-columns:repeat(4,1fr);gap:20px" class="gcs-trust">
+    <sc-for list="{{ trustPoints }}" as="tp" hint-placeholder-count="4">
+      <div style="display:flex;align-items:center;gap:14px">
+        <div style="min-width:44px;height:44px;border-radius:12px;background:rgba(244,196,48,0.16);display:flex;align-items:center;justify-content:center;font-size:22px">{{ tp.icon }}</div>
+        <div style="font-family:'Poppins';font-weight:600;font-size:15px;line-height:1.25">{{ tp.label }}</div>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section id="services" style="max-width:1180px;margin:0 auto;padding:90px 24px 40px" class="gcs-sec">
+  <div style="text-align:center;max-width:640px;margin:0 auto 50px">
+    <div style="font-weight:800;color:#0e7ea8;letter-spacing:2px;font-size:13px;margin-bottom:12px">OUR CLEANING SERVICES</div>
+    <h2 class="gcs-h2" style="font-size:40px;font-weight:800;letter-spacing:-0.5px">Everything your basic clean covers</h2>
+    <p style="font-size:17px;color:#4a5c62;margin-top:16px;line-height:1.6">Routine maintenance and essential everyday cleaning, done thoroughly on every visit.</p>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px" class="gcs-cards">
+    <sc-for list="{{ services }}" as="sv" hint-placeholder-count="6">
+      <div style="background:#fff;border:1px solid #eaf1f3;border-radius:20px;padding:30px 26px;box-shadow:0 8px 24px rgba(14,58,70,0.05);transition:transform 0.2s,box-shadow 0.2s" style-hover="transform:translateY(-6px);box-shadow:0 18px 40px rgba(14,58,70,0.12)">
+        <div style="width:56px;height:56px;border-radius:16px;background:{{ sv.bg }};display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:20px">{{ sv.icon }}</div>
+        <h3 style="font-size:20px;font-weight:700;margin-bottom:10px">{{ sv.title }}</h3>
+        <p style="font-size:15px;color:#5a6b70;line-height:1.6">{{ sv.desc }}</p>
+      </div>
+    </sc-for>
+  </div>
+
+  <!-- spaces we clean -->
+  <div style="margin-top:60px;background:linear-gradient(135deg,#f2f9fb,#eafaf3);border-radius:24px;padding:38px 34px;text-align:center">
+    <h3 style="font-size:22px;font-weight:700;margin-bottom:8px">Spaces we clean</h3>
+    <p style="color:#5a6b70;font-size:15px;margin-bottom:26px">Our team is in action across all kinds of properties.</p>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px">
+      <sc-for list="{{ spaces }}" as="sp" hint-placeholder-count="6">
+        <div style="display:inline-flex;align-items:center;gap:9px;background:#fff;border:1px solid #e3edf0;padding:11px 20px;border-radius:999px;font-weight:700;font-size:15px;color:#0e3a46;box-shadow:0 3px 10px rgba(14,58,70,0.05)"><span style="font-size:18px">{{ sp.icon }}</span>{{ sp.label }}</div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY CHOOSE US ============ -->
+<section id="why" style="background:#f7fbfc;margin-top:60px">
+  <div style="max-width:1180px;margin:0 auto;padding:90px 24px;display:grid;grid-template-columns:0.9fr 1.1fr;gap:60px;align-items:center" class="gcs-why gcs-sec">
+    <div style="position:relative">
+      <div style="border-radius:26px;overflow:hidden;box-shadow:0 24px 50px rgba(14,58,70,0.18);aspect-ratio:4/3">
+        <image-slot id="gcs-why" shape="rect" src="assets/team-office.jpg" placeholder="Drop a before/after or team photo" fit="cover"></image-slot>
+      </div>
+      <div style="position:absolute;bottom:-24px;right:-20px;background:#f4c430;color:#0e3a46;border-radius:18px;padding:18px 22px;box-shadow:0 14px 30px rgba(244,196,48,0.4);text-align:center">
+        <div style="font-family:'Poppins';font-weight:800;font-size:22px;line-height:1">Best prices</div>
+        <div style="font-weight:700;font-size:13px">in town</div>
+      </div>
+    </div>
+    <div>
+      <div style="font-weight:800;color:#0e7ea8;letter-spacing:2px;font-size:13px;margin-bottom:12px">WHY CHOOSE US</div>
+      <h2 class="gcs-h2" style="font-size:38px;font-weight:800;letter-spacing:-0.5px;margin-bottom:14px">Cleaning you can trust, every single visit</h2>
+      <p style="font-size:16px;color:#4a5c62;line-height:1.6;margin-bottom:28px">We're a local Kuching team focused on reliable, high-quality cleaning and complete customer confidence.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:22px" class="gcs-why-grid">
+        <sc-for list="{{ reasons }}" as="r" hint-placeholder-count="4">
+          <div style="display:flex;gap:14px">
+            <div style="min-width:44px;height:44px;border-radius:12px;background:#fff;border:1px solid #e3edf0;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 4px 12px rgba(14,58,70,0.06)">{{ r.icon }}</div>
+            <div>
+              <h4 style="font-size:16px;font-weight:700;margin-bottom:4px">{{ r.title }}</h4>
+              <p style="font-size:14px;color:#5a6b70;line-height:1.5">{{ r.desc }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section id="pricing" class="gcs-sec" style="max-width:1180px;margin:0 auto;padding:90px 24px">
+  <div style="text-align:center;max-width:640px;margin:0 auto 40px">
+    <div style="font-weight:800;color:#0e7ea8;letter-spacing:2px;font-size:13px;margin-bottom:12px">SIMPLE, HONEST PRICING</div>
+    <h2 class="gcs-h2" style="font-size:40px;font-weight:800;letter-spacing:-0.5px">Transparent rates, no surprises</h2>
+    <p style="font-size:17px;color:#4a5c62;margin-top:16px;line-height:1.6">Pay per session, or subscribe monthly and save even more.</p>
+  </div>
+  <div style="display:flex;justify-content:center;margin-bottom:34px">
+    <div style="display:inline-flex;background:#f0f6f8;border-radius:999px;padding:5px;gap:4px">
+      <button onClick="{{ setBasic }}" style="{{ basicBtnStyle }}">Pay Per Session</button>
+      <button onClick="{{ setMonthly }}" style="{{ monthlyBtnStyle }}">Monthly Package</button>
+    </div>
+  </div>
+  <div style="max-width:720px;margin:0 auto;background:#fff;border:1px solid #eaf1f3;border-radius:24px;overflow:hidden;box-shadow:0 16px 44px rgba(14,58,70,0.08)">
+    <div class="gcs-price-head" style="display:grid;grid-template-columns:1.4fr 1fr 1fr;background:#0e3a46;color:#fff;font-family:'Poppins';font-weight:600;font-size:15px">
+      <div style="padding:18px 26px">Duration</div>
+      <div style="padding:18px 20px;text-align:center">1 Cleaner</div>
+      <div style="padding:18px 20px;text-align:center;background:rgba(244,196,48,0.14)">2 Cleaners</div>
+    </div>
+    <sc-for list="{{ priceRows }}" as="row" hint-placeholder-count="4">
+      <div class="gcs-price-row" style="display:grid;grid-template-columns:1.4fr 1fr 1fr;border-top:1px solid #eef4f5;align-items:center" style-hover="background:#f9fcfd">
+        <div style="padding:18px 26px;font-weight:700;color:#0e3a46">{{ row.dur }}</div>
+        <div style="padding:18px 20px;text-align:center;font-weight:700;font-size:17px;color:#2c3f44">{{ row.c1 }}</div>
+        <div style="padding:18px 20px;text-align:center;font-weight:800;font-size:17px;color:#0e7ea8;background:rgba(244,196,48,0.06)">{{ row.c2 }}</div>
+      </div>
+    </sc-for>
+    <div style="padding:16px 26px;background:#fbfdfe;border-top:1px solid #eef4f5;font-size:13.5px;color:#6a7b80">{{ priceNote }}</div>
+  </div>
+  <p style="text-align:center;font-size:14px;color:#8a9a9f;margin-top:20px">Post-renovation cleaning is priced by quotation. <a href="https://GCSkuching.wasap.my" target="_blank" style="font-weight:700">request a quote →</a></p>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section id="process" style="background:#0e3a46;color:#fff">
+  <div style="max-width:1180px;margin:0 auto;padding:90px 24px" class="gcs-sec">
+    <div style="text-align:center;max-width:640px;margin:0 auto 54px">
+      <div style="font-weight:800;color:#f4c430;letter-spacing:2px;font-size:13px;margin-bottom:12px">HOW IT WORKS</div>
+      <h2 class="gcs-h2" style="font-size:40px;font-weight:800;letter-spacing:-0.5px;color:#fff">Booked in four easy steps</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:22px" class="gcs-steps">
+      <sc-for list="{{ steps }}" as="st" hint-placeholder-count="4">
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:30px 24px">
+          <div style="width:48px;height:48px;border-radius:14px;background:#f4c430;color:#0e3a46;display:flex;align-items:center;justify-content:center;font-family:'Poppins';font-weight:800;font-size:20px;margin-bottom:20px">{{ st.n }}</div>
+          <div style="font-size:26px;margin-bottom:12px">{{ st.icon }}</div>
+          <h3 style="font-size:19px;font-weight:700;color:#fff;margin-bottom:8px">{{ st.title }}</h3>
+          <p style="font-size:14px;color:#b8ccd1;line-height:1.55">{{ st.desc }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALLERY ============ -->
+<section id="gallery" class="gcs-sec" style="max-width:1180px;margin:0 auto;padding:90px 24px">
+  <div style="text-align:center;max-width:640px;margin:0 auto 46px">
+    <div style="font-weight:800;color:#0e7ea8;letter-spacing:2px;font-size:13px;margin-bottom:12px">OUR TEAM IN ACTION</div>
+    <h2 class="gcs-h2" style="font-size:40px;font-weight:800;letter-spacing:-0.5px">Real results, real spaces</h2>
+    <p style="font-size:17px;color:#4a5c62;margin-top:16px;line-height:1.6">A look at our team at work across homes, offices, shops and businesses around Kuching.</p>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:180px;gap:16px" class="gcs-gallery">
+    <div style="grid-column:span 2;grid-row:span 2;border-radius:20px;overflow:hidden;box-shadow:0 10px 26px rgba(14,58,70,0.1)"><image-slot id="gcs-g1" shape="rect" src="assets/team-home.jpg" placeholder="Home cleaning"></image-slot></div>
+    <div style="border-radius:20px;overflow:hidden;box-shadow:0 10px 26px rgba(14,58,70,0.1)"><image-slot id="gcs-g2" shape="rect" src="assets/team-office.jpg" placeholder="Office"></image-slot></div>
+    <div style="border-radius:20px;overflow:hidden;box-shadow:0 10px 26px rgba(14,58,70,0.1)"><image-slot id="gcs-g3" shape="rect" src="assets/team-cafe.jpg" placeholder="Café / restaurant"></image-slot></div>
+    <div style="grid-column:span 2;border-radius:20px;overflow:hidden;box-shadow:0 10px 26px rgba(14,58,70,0.1)"><image-slot id="gcs-g4" shape="rect" src="assets/team-postreno.jpg" placeholder="Post-renovation"></image-slot></div>
+    <div style="border-radius:20px;overflow:hidden;box-shadow:0 10px 26px rgba(14,58,70,0.1)"><image-slot id="gcs-g5" shape="rect" src="assets/team-shop.jpg" placeholder="Shop"></image-slot></div>
+    <div style="border-radius:20px;overflow:hidden;box-shadow:0 10px 26px rgba(14,58,70,0.1)"><image-slot id="gcs-g6" shape="rect" src="assets/team-neglected.jpg" placeholder="Neglected property"></image-slot></div>
+    <a href="https://www.tiktok.com/@goldencleaningservicekch" target="_blank" style="grid-column:span 2;border-radius:20px;background:linear-gradient(135deg,#0e3a46,#0e7ea8);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;box-shadow:0 10px 26px rgba(14,58,70,0.16)" style-hover="transform:translateY(-4px)">
+      <div style="font-family:'Poppins';font-weight:800;font-size:21px;color:#fff;margin-bottom:6px">See more real results</div>
+      <div style="font-size:14px;color:#c3d6db;font-weight:600;margin-bottom:16px">Follow us for fresh before &amp; afters</div>
+      <div style="display:flex;gap:10px">
+        <span style="background:rgba(255,255,255,0.14);padding:9px 18px;border-radius:999px;font-weight:700;font-size:13px">🎵 TikTok</span>
+        <span style="background:rgba(255,255,255,0.14);padding:9px 18px;border-radius:999px;font-weight:700;font-size:13px">📘 Facebook</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ============ CONFIDENCE / TRUST ============ -->
+<section style="background:linear-gradient(135deg,#f2f9fb,#eafaf3)">
+  <div style="max-width:1180px;margin:0 auto;padding:80px 24px;text-align:center">
+    <div style="font-weight:800;color:#0e7ea8;letter-spacing:2px;font-size:13px;margin-bottom:12px">WHAT THEY SAY</div>
+    <h2 class="gcs-h2" style="font-size:36px;font-weight:800;letter-spacing:-0.5px;max-width:720px;margin:0 auto 40px">Real words from happy customers</h2>
+    <div style="max-width:1080px;margin:0 auto 24px;column-count:3;column-gap:18px" class="gcs-testi">
+      <sc-for list="{{ reviews }}" as="rv" hint-placeholder-count="9">
+        <div style="break-inside:avoid;margin-bottom:18px;background:#fff;padding:8px;border-radius:16px;box-shadow:0 8px 24px rgba(14,58,70,0.08);border:1px solid #eef4f5">
+          <img src="{{ rv }}" alt="Customer review on WhatsApp" loading="lazy" style="display:block;width:100%;border-radius:10px">
+        </div>
+      </sc-for>
+    </div>
+    <div style="display:inline-flex;align-items:center;gap:10px;background:#fff;border:1px solid #e3edf0;padding:10px 20px;border-radius:999px;font-weight:700;font-size:14px;color:#0e3a46;box-shadow:0 4px 14px rgba(14,58,70,0.06);margin-bottom:52px"><span style="color:#f4c430;letter-spacing:1px">★★★★★</span> Real WhatsApp messages from our customers</div>
+    <h3 style="font-size:22px;font-weight:700;letter-spacing:-0.3px;max-width:720px;margin:0 auto 30px;color:#0e3a46">Why Kuching households & businesses keep us on call</h3>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:22px;max-width:960px;margin:0 auto" class="gcs-conf">
+      <sc-for list="{{ confidence }}" as="c" hint-placeholder-count="4">
+        <div style="background:#fff;border-radius:20px;padding:30px 22px;box-shadow:0 8px 24px rgba(14,58,70,0.06)">
+          <div style="font-family:'Poppins';font-weight:800;font-size:30px;color:#0e7ea8;margin-bottom:8px">{{ c.stat }}</div>
+          <div style="font-weight:600;font-size:14px;color:#4a5c62;line-height:1.4">{{ c.label }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BOOK IN MINUTES (CHATBOT PROMO) ============ -->
+<section style="max-width:1180px;margin:0 auto;padding:30px 24px 10px">
+  <div style="background:linear-gradient(135deg,#f2f9fb,#eafaf3);border:1px solid #e3f0ec;border-radius:28px;padding:48px 44px;display:grid;grid-template-columns:1.1fr 0.9fr;gap:48px;align-items:center" class="gcs-bookmin">
+    <div>
+      <div style="font-weight:800;color:#0e7ea8;letter-spacing:2px;font-size:13px;margin-bottom:12px">WHATSAPP BOOKING ASSISTANT</div>
+      <h2 class="gcs-h2" style="font-size:38px;font-weight:800;letter-spacing:-0.5px;margin-bottom:14px">Book your cleaning in minutes</h2>
+      <p style="font-size:17px;color:#4a5c62;line-height:1.6;margin-bottom:24px;max-width:460px">Use our WhatsApp booking assistant to choose your service, schedule a time, and send your request straight to our team.</p>
+      <div class="gcs-cta-row" style="display:flex;flex-wrap:wrap;gap:12px">
+        <button onClick="{{ openChat }}" style="display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#fff;border:none;padding:15px 26px;border-radius:999px;font-family:Poppins,sans-serif;font-weight:800;font-size:16px;cursor:pointer;box-shadow:0 10px 24px rgba(37,211,102,0.4)" style-hover="transform:translateY(-2px)">💬 Book via Chat</button>
+        <a href="https://GCSkuching.wasap.my" target="_blank" style="display:inline-flex;align-items:center;gap:10px;background:#fff;color:#0e3a46;padding:15px 26px;border-radius:999px;font-weight:700;font-size:16px;border:1.5px solid #dbe7ea" style-hover="border-color:#0e7ea8;color:#0e7ea8">Message us directly</a>
+      </div>
+      <div style="display:flex;gap:22px;margin-top:26px;flex-wrap:wrap">
+        <div style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:#0e3a46"><span style="color:#0e7ea8">✓</span> Pick your service</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:#0e3a46"><span style="color:#0e7ea8">✓</span> Choose a time</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:#0e3a46"><span style="color:#0e7ea8">✓</span> Send on WhatsApp</div>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:center">
+      <div style="width:300px;background:#0e3a46;border-radius:34px;padding:12px;box-shadow:0 30px 60px rgba(14,58,70,0.3)">
+        <div style="background:#eaf3f1;border-radius:24px;overflow:hidden">
+          <div style="display:flex;align-items:center;gap:10px;background:#0e3a46;padding:12px 14px">
+            <img src="assets/logo.jpg" alt="Golden Cleaning Services" style="width:34px;height:34px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,0.25)">
+            <div><div style="font-family:Poppins,sans-serif;font-weight:700;font-size:13px;color:#fff">Golden Cleaning Services</div><div style="font-size:10.5px;color:#9fd8c4;font-weight:600;display:flex;align-items:center;gap:5px;margin-top:1px"><span style="width:6px;height:6px;border-radius:50%;background:#25D366"></span>Usually replies on WhatsApp</div></div>
+          </div>
+          <div style="padding:14px 12px;background:linear-gradient(180deg,#eef6f3,#e7f1ee);min-height:250px">
+            <div style="display:flex;margin-bottom:8px"><div style="max-width:82%;background:#fff;padding:9px 12px;border-radius:12px 12px 12px 3px;font-size:12.5px;color:#2c3f44;box-shadow:0 1px 4px rgba(14,58,70,0.08);line-height:1.45">Hi! Welcome to Golden Cleaning Services 👋 How can we help you today?</div></div>
+            <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;margin-bottom:10px">
+              <span style="background:#fff;border:1.5px solid #b7e0d3;color:#0e7ea8;padding:7px 12px;border-radius:999px;font-weight:700;font-size:11.5px">🧽 Book Cleaning</span>
+              <span style="background:#fff;border:1.5px solid #b7e0d3;color:#0e7ea8;padding:7px 12px;border-radius:999px;font-weight:700;font-size:11.5px">💰 View Prices</span>
+            </div>
+            <div style="display:flex;justify-content:flex-end;margin-bottom:8px"><div style="background:#d7f2e3;padding:9px 12px;border-radius:12px 12px 3px 12px;font-size:12.5px;color:#0e3a46;box-shadow:0 1px 4px rgba(14,58,70,0.08)">Home Cleaning</div></div>
+            <div style="display:flex"><div style="max-width:82%;background:#fff;padding:9px 12px;border-radius:12px 12px 12px 3px;font-size:12.5px;color:#2c3f44;box-shadow:0 1px 4px rgba(14,58,70,0.08);line-height:1.45">How many cleaners would you prefer?</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section style="max-width:1180px;margin:0 auto;padding:80px 24px">
+  <div style="position:relative;background:#0e3a46;border-radius:32px;padding:64px 48px;overflow:hidden;text-align:center">
+    <div style="position:absolute;top:-100px;right:-60px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(244,196,48,0.22),transparent 70%)"></div>
+    <div style="position:absolute;bottom:-120px;left:-60px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(59,167,214,0.22),transparent 70%)"></div>
+    <div style="position:relative">
+      <h2 class="gcs-h2" style="font-size:42px;font-weight:800;color:#fff;letter-spacing:-0.5px;max-width:640px;margin:0 auto 16px">Ready for a spotless space?</h2>
+      <p style="font-size:18px;color:#c3d6db;max-width:520px;margin:0 auto 34px;line-height:1.6">Message us on WhatsApp or give us a call. We'll sort out a free quote and a time that suits you.</p>
+      <div class="gcs-cta-row" style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center">
+        <a href="https://GCSkuching.wasap.my" target="_blank" style="display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#fff;padding:16px 30px;border-radius:999px;font-weight:800;font-size:17px;box-shadow:0 12px 28px rgba(37,211,102,0.4)" style-hover="transform:translateY(-2px)">💬 WhatsApp Us</a>
+        <a href="tel:+60189759983" style="display:inline-flex;align-items:center;gap:10px;background:#f4c430;color:#0e3a46;padding:16px 30px;border-radius:999px;font-weight:800;font-size:17px;box-shadow:0 12px 28px rgba(244,196,48,0.4)" style-hover="transform:translateY(-2px)">📞 018-975 9983</a>
+      </div>
+      <div style="margin-top:22px;font-size:14px;color:#8fa8ae;font-weight:600">Open daily 8:00 AM to 7:00 PM · Based in Kuching, Sarawak</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer style="background:#0a2b34;color:#c3d6db">
+  <div style="max-width:1180px;margin:0 auto;padding:60px 24px 30px;display:grid;grid-template-columns:1.4fr 1fr 1fr 1.1fr;gap:40px" class="gcs-footer">
+    <div>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+        <img src="assets/logo.jpg" alt="Golden Cleaning Services" style="width:46px;height:46px;border-radius:12px;object-fit:cover">
+        <span style="font-family:'Poppins';font-weight:700;font-size:16px;color:#fff;line-height:1.1">Golden Cleaning<br><span style="font-weight:600;font-size:12px;color:#f4c430;letter-spacing:1.5px">SERVICES</span></span>
+      </div>
+      <p style="font-size:14px;line-height:1.6;color:#8fa8ae;max-width:280px">Reliable, professional cleaning for homes and businesses across Kuching, Sarawak. One of the best prices in town.</p>
+    </div>
+    <div>
+      <h4 style="color:#fff;font-size:15px;font-weight:700;margin-bottom:16px">Quick Links</h4>
+      <div style="display:flex;flex-direction:column;gap:11px;font-size:14px">
+        <a href="#services" style="color:#a8bfc5">Services</a>
+        <a href="#pricing" style="color:#a8bfc5">Pricing</a>
+        <a href="#process" style="color:#a8bfc5">How It Works</a>
+        <a href="#gallery" style="color:#a8bfc5">Gallery</a>
+      </div>
+    </div>
+    <div>
+      <h4 style="color:#fff;font-size:15px;font-weight:700;margin-bottom:16px">Service Areas</h4>
+      <div style="display:flex;flex-direction:column;gap:11px;font-size:14px;color:#a8bfc5">
+        <span>Pending (office): free</span>
+        <span>Within 15 KM: RM15</span>
+        <span>Within 20 KM: RM30</span>
+        <span>Greater Kuching, Sarawak</span>
+      </div>
+    </div>
+    <div>
+      <h4 style="color:#fff;font-size:15px;font-weight:700;margin-bottom:16px">Get In Touch</h4>
+      <div style="display:flex;flex-direction:column;gap:11px;font-size:14px;color:#a8bfc5">
+        <a href="tel:+60189759983" style="color:#a8bfc5">📞 018-975 9983</a>
+        <a href="https://GCSkuching.wasap.my" target="_blank" style="color:#a8bfc5">💬 WhatsApp us</a>
+        <span>🕗 Daily 8:00 AM to 7:00 PM</span>
+        <a href="https://www.facebook.com/profile.php?id=61577831129523" target="_blank" style="color:#a8bfc5">📘 Follow us on Facebook</a>
+        <a href="https://www.tiktok.com/@goldencleaningservicekch" target="_blank" style="color:#a8bfc5">🎵 Follow us on TikTok</a>
+      </div>
+    </div>
+  </div>
+  <div style="border-top:1px solid rgba(255,255,255,0.08)">
+    <div style="max-width:1180px;margin:0 auto;padding:20px 24px;font-size:13px;color:#7a949b;text-align:center">© 2026 Golden Cleaning Services · Kuching, Sarawak · Tools & detergents provided free on request</div>
+  </div>
+</footer>
+
+</div>
+
+<!-- ============ WHATSAPP BOOKING CHATBOT ============ -->
+<sc-if value="{{ chatClosed }}" hint-placeholder-val="{{ true }}">
+  <button onClick="{{ toggleChat }}" class="gcs-fab" style="position:fixed;right:24px;bottom:24px;z-index:120;display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#fff;border:none;padding:13px 20px 13px 14px;border-radius:999px;font-family:Poppins,sans-serif;font-weight:700;font-size:15px;cursor:pointer;box-shadow:0 12px 30px rgba(37,211,102,0.45)" style-hover="transform:translateY(-2px)">
+    <span style="display:flex;width:30px;height:30px;align-items:center;justify-content:center;background:rgba(255,255,255,0.2);border-radius:50%"><svg viewBox="0 0 32 32" width="20" height="20" fill="#fff"><path d="M16.003 2.667C8.64 2.667 2.67 8.637 2.67 16c0 2.35.616 4.646 1.786 6.667L2.667 29.333l6.83-1.79A13.27 13.27 0 0 0 16 29.333c7.364 0 13.334-5.97 13.334-13.333S23.367 2.667 16.003 2.667zm0 24a10.6 10.6 0 0 1-5.4-1.476l-.387-.23-4.054 1.063 1.082-3.95-.252-.406A10.57 10.57 0 0 1 5.337 16c0-5.89 4.786-10.667 10.666-10.667 5.885 0 10.667 4.777 10.667 10.667 0 5.885-4.782 10.667-10.667 10.667zm5.847-7.98c-.32-.16-1.894-.934-2.187-1.04-.293-.107-.507-.16-.72.16-.213.32-.826 1.04-1.013 1.253-.187.213-.373.24-.693.08-.32-.16-1.352-.498-2.576-1.588-.952-.85-1.595-1.9-1.782-2.22-.187-.32-.02-.493.14-.652.144-.143.32-.373.48-.56.16-.187.213-.32.32-.533.107-.213.053-.4-.027-.56-.08-.16-.72-1.737-.987-2.377-.26-.624-.524-.54-.72-.55l-.613-.01c-.213 0-.56.08-.853.4-.293.32-1.12 1.093-1.12 2.667 0 1.573 1.147 3.093 1.307 3.307.16.213 2.253 3.44 5.46 4.823.763.33 1.36.527 1.824.674.766.244 1.464.21 2.016.127.615-.092 1.894-.774 2.16-1.52.267-.747.267-1.387.187-1.52-.08-.133-.293-.213-.613-.373z"/></svg></span>
+    Book via Chat
+  </button>
+</sc-if>
+
+<sc-if value="{{ chatOpen }}" hint-placeholder-val="{{ false }}">
+  <div class="gcs-chat-popup" style="position:fixed;right:24px;bottom:24px;z-index:121;width:378px;max-width:calc(100vw - 32px);height:596px;max-height:calc(100vh - 48px);display:flex;flex-direction:column;background:#eaf3f1;border-radius:20px;overflow:hidden;box-shadow:0 24px 60px rgba(14,58,70,0.32);animation:gcsPop .22s ease both">
+    <div style="display:flex;align-items:center;gap:11px;background:#0e3a46;padding:12px 12px 12px 14px">
+      <img src="assets/logo.jpg" alt="Golden Cleaning Services" style="width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,0.25);flex-shrink:0">
+      <div style="flex:1;min-width:0">
+        <div style="font-family:Poppins,sans-serif;font-weight:700;font-size:15px;color:#fff;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Golden Cleaning Services</div>
+        <div style="display:flex;align-items:center;gap:6px;font-size:11.5px;color:#9fd8c4;font-weight:600;margin-top:2px;white-space:nowrap"><span style="width:7px;height:7px;border-radius:50%;background:#25D366;display:inline-block;flex-shrink:0"></span>Usually replies on WhatsApp</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;flex-shrink:0">
+        <sc-if value="{{ showChatReset }}" hint-placeholder-val="{{ false }}">
+          <button onClick="{{ askReset }}" aria-label="Start over" title="Start over" style="background:rgba(255,255,255,0.12);border:none;color:#cfe8df;width:32px;height:32px;border-radius:50%;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1" style-hover="background:rgba(255,255,255,0.22);color:#fff">↺</button>
+        </sc-if>
+        <button onClick="{{ closeChat }}" aria-label="Close chat" style="background:rgba(255,255,255,0.12);border:none;color:#fff;width:32px;height:32px;border-radius:50%;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1">×</button>
+      </div>
+    </div>
+    <sc-if value="{{ showResetConfirm }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;align-items:center;gap:10px;background:#fff8e5;border-bottom:1px solid #f2e4b8;padding:10px 14px">
+        <span style="flex:1;font-size:13px;font-weight:600;color:#8a6d17">Start over and clear this chat?</span>
+        <button onClick="{{ resetChat }}" style="background:#0e3a46;color:#fff;border:none;padding:7px 14px;border-radius:999px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:Mulish,sans-serif">Yes, restart</button>
+        <button onClick="{{ cancelReset }}" style="background:#fff;color:#5a6b70;border:1px solid #e3d9b8;padding:7px 14px;border-radius:999px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:Mulish,sans-serif">Cancel</button>
+      </div>
+    </sc-if>
+    <div ref="{{ chatRef }}" style="flex:1;overflow-y:auto;padding:16px 14px;background:linear-gradient(180deg,#eef6f3,#e7f1ee)">
+      <sc-for list="{{ chatMessages }}" as="m" hint-placeholder-count="1">
+        <div style="{{ m.wrapStyle }}"><div style="{{ m.bubbleStyle }}">{{ m.text }}</div></div>
+      </sc-for>
+      <sc-if value="{{ showChatReplies }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;justify-content:flex-end">
+          <sc-for list="{{ chatReplies }}" as="r" hint-placeholder-count="3">
+            <button onClick="{{ r.onClick }}" style="background:#fff;border:1.5px solid #b7e0d3;color:#0e7ea8;padding:9px 15px;border-radius:999px;font-weight:700;font-size:13.5px;cursor:pointer;font-family:Mulish,sans-serif" style-hover="background:#0e7ea8;color:#fff;border-color:#0e7ea8">{{ r.label }}</button>
+          </sc-for>
+        </div>
+      </sc-if>
+      <sc-if value="{{ showChatWaOnly }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;justify-content:flex-end;margin-top:8px">
+          <a href="{{ chatWaAsk }}" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;padding:11px 18px;border-radius:999px;font-weight:800;font-size:14px;box-shadow:0 8px 20px rgba(37,211,102,0.4)">💬 Continue on WhatsApp</a>
+        </div>
+      </sc-if>
+      <sc-if value="{{ showChatForm }}" hint-placeholder-val="{{ false }}">
+        <div style="background:#fff;border-radius:14px;padding:14px;margin-top:8px;box-shadow:0 2px 8px rgba(14,58,70,0.08);display:flex;flex-direction:column;gap:9px">
+          <input value="{{ booking.date }}" onChange="{{ onDate }}" placeholder="Preferred date (e.g. Saturday)" style="width:100%;border:1px solid #d8e5e8;border-radius:10px;padding:10px 12px;font-family:Mulish,sans-serif;font-size:13.5px;color:#0e3a46;outline:none;background:#f8fbfc" style-focus="border-color:#0e7ea8;background:#fff">
+          <input value="{{ booking.time }}" onChange="{{ onTime }}" placeholder="Preferred time (e.g. 10:00 AM)" style="width:100%;border:1px solid #d8e5e8;border-radius:10px;padding:10px 12px;font-family:Mulish,sans-serif;font-size:13.5px;color:#0e3a46;outline:none;background:#f8fbfc" style-focus="border-color:#0e7ea8;background:#fff">
+          <input value="{{ booking.location }}" onChange="{{ onLocation }}" placeholder="Area / location in Kuching" style="width:100%;border:1px solid #d8e5e8;border-radius:10px;padding:10px 12px;font-family:Mulish,sans-serif;font-size:13.5px;color:#0e3a46;outline:none;background:#f8fbfc" style-focus="border-color:#0e7ea8;background:#fff">
+          <input value="{{ booking.name }}" onChange="{{ onName }}" placeholder="Your name" style="width:100%;border:1px solid #d8e5e8;border-radius:10px;padding:10px 12px;font-family:Mulish,sans-serif;font-size:13.5px;color:#0e3a46;outline:none;background:#f8fbfc" style-focus="border-color:#0e7ea8;background:#fff">
+          <input value="{{ booking.phone }}" onChange="{{ onPhone }}" placeholder="Phone number" style="width:100%;border:1px solid #d8e5e8;border-radius:10px;padding:10px 12px;font-family:Mulish,sans-serif;font-size:13.5px;color:#0e3a46;outline:none;background:#f8fbfc" style-focus="border-color:#0e7ea8;background:#fff">
+          <button onClick="{{ reviewBooking }}" style="{{ reviewStyle }}">Review booking</button>
+        </div>
+      </sc-if>
+      <sc-if value="{{ showChatSummary }}" hint-placeholder-val="{{ false }}">
+        <div style="background:#fff;border-radius:14px;padding:16px;margin-top:8px;box-shadow:0 2px 8px rgba(14,58,70,0.08)">
+          <div style="font-family:Poppins,sans-serif;font-weight:700;font-size:14px;color:#0e3a46;margin-bottom:12px">Here is your booking summary</div>
+          <div style="display:flex;flex-direction:column;gap:8px;font-size:13.5px">
+            <div style="display:flex;justify-content:space-between;gap:12px"><span style="color:#8a9a9f">Service</span><span style="font-weight:700;color:#0e3a46;text-align:right">{{ sumService }}</span></div>
+            <div style="display:flex;justify-content:space-between;gap:12px"><span style="color:#8a9a9f">Cleaners</span><span style="font-weight:700;color:#0e3a46;text-align:right">{{ sumCleaners }}</span></div>
+            <div style="display:flex;justify-content:space-between;gap:12px"><span style="color:#8a9a9f">Duration</span><span style="font-weight:700;color:#0e3a46;text-align:right">{{ sumDuration }}</span></div>
+            <div style="display:flex;justify-content:space-between;gap:12px"><span style="color:#8a9a9f">Date / Time</span><span style="font-weight:700;color:#0e3a46;text-align:right">{{ sumDT }}</span></div>
+            <div style="display:flex;justify-content:space-between;gap:12px"><span style="color:#8a9a9f">Location</span><span style="font-weight:700;color:#0e3a46;text-align:right">{{ sumLocation }}</span></div>
+            <div style="display:flex;justify-content:space-between;gap:12px"><span style="color:#8a9a9f">Name</span><span style="font-weight:700;color:#0e3a46;text-align:right">{{ sumName }}</span></div>
+            <div style="display:flex;justify-content:space-between;gap:12px"><span style="color:#8a9a9f">Phone</span><span style="font-weight:700;color:#0e3a46;text-align:right">{{ sumPhone }}</span></div>
+          </div>
+          <div style="background:#f2f9fb;border-radius:10px;padding:10px 12px;font-size:12.5px;color:#4a5c62;line-height:1.5;margin-top:12px">Our team will confirm your booking through WhatsApp.</div>
+          <a href="{{ chatWaLink }}" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#25D366;color:#fff;padding:12px;border-radius:12px;font-family:Poppins,sans-serif;font-weight:800;font-size:14.5px;margin-top:12px;box-shadow:0 8px 20px rgba(37,211,102,0.4)">💬 Continue on WhatsApp</a>
+          <button onClick="{{ resetChat }}" style="width:100%;background:none;border:none;color:#8a9a9f;font-size:12.5px;font-weight:600;cursor:pointer;margin-top:10px;font-family:Mulish,sans-serif">Start over</button>
+        </div>
+      </sc-if>
+    </div>
+    <div style="background:#fff;border-top:1px solid #e3edf0;padding:9px 14px;text-align:center;font-size:11.5px;color:#8a9a9f;font-weight:600">🔒 Final confirmation will be handled through WhatsApp.</div>
+  </div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1180,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  chatRef = React.createRef();
+  state = {
+    plan: 'basic',
+    chatOpen: false,
+    step: 'intro',
+    booking: { service:'', cleaners:'', duration:'', date:'', time:'', location:'', name:'', phone:'' },
+    history: [{ from:'bot', text:'Hi! Welcome to Golden Cleaning Services 👋 How can we help you today?' }],
+    confirmReset: false,
+    menuOpen: false,
+  };
+
+  componentDidUpdate() {
+    const el = this.chatRef && this.chatRef.current;
+    if (el) el.scrollTop = el.scrollHeight;
+  }
+
+  setField(name, val) {
+    this.setState(s => ({ booking: { ...s.booking, [name]: val } }));
+  }
+
+  pick(updates, userText, botTexts, nextStep) {
+    this.setState(s => {
+      const history = s.history.slice();
+      history.push({ from: 'user', text: userText });
+      botTexts.forEach(t => history.push({ from: 'bot', text: t }));
+      return { booking: { ...s.booking, ...updates }, history, step: nextStep };
+    });
+  }
+
+  reviewBooking() {
+    const b = this.state.booking;
+    if (!(b.date && b.time && b.location && b.name && b.phone)) return;
+    this.setState(s => {
+      const history = s.history.slice();
+      history.push({ from: 'user', text: 'Details submitted ✅' });
+      history.push({ from: 'bot', text: 'Here is your booking summary 👇' });
+      return { history, step: 'summary' };
+    });
+  }
+
+  resetChat() {
+    this.setState({
+      step: 'intro',
+      booking: { service:'', cleaners:'', duration:'', date:'', time:'', location:'', name:'', phone:'' },
+      history: [{ from:'bot', text:'Hi! Welcome to Golden Cleaning Services 👋 How can we help you today?' }],
+      confirmReset: false,
+    });
+  }
+
+  chatVals() {
+    const s = this.state;
+    const b = s.booking;
+    const step = s.step;
+
+    const messages = s.history.map((m, i) => ({
+      key: 'm' + i,
+      text: m.text,
+      wrapStyle: 'display:flex;margin-bottom:8px;justify-content:' + (m.from === 'bot' ? 'flex-start' : 'flex-end'),
+      bubbleStyle: (m.from === 'bot'
+        ? 'background:#fff;border-radius:12px 12px 12px 3px;color:#2c3f44'
+        : 'background:#d7f2e3;border-radius:12px 12px 3px 12px;color:#0e3a46')
+        + ';max-width:82%;padding:9px 13px;font-size:14px;line-height:1.5;box-shadow:0 1px 4px rgba(14,58,70,0.08);white-space:pre-line',
+    }));
+
+    let replies = [];
+    if (step === 'intro') {
+      replies = [
+        { label: '🧽 Book Cleaning', onClick: () => this.pick({}, 'Book Cleaning', ['Great! What type of cleaning service do you need?'], 'service') },
+        { label: '💰 View Prices', onClick: () => this.pick({}, 'View Prices', ['Here are our starting rates 👇', '1 cleaner: 1h RM50 · 2h RM70 · 8h RM100\n2 cleaners: 2h RM100 · 4h RM150 · 8h RM320\nPost-renovation is quoted on request.'], 'prices') },
+        { label: '❓ Ask a Question', onClick: () => this.pick({}, 'Ask a Question', ['No problem! Tap “Continue on WhatsApp” below and our team will reply to you directly. 😊'], 'question') },
+      ];
+    } else if (step === 'prices') {
+      replies = [
+        { label: '🧽 Book Cleaning', onClick: () => this.pick({}, 'Book Cleaning', ['Great! What type of cleaning service do you need?'], 'service') },
+      ];
+    } else if (step === 'service') {
+      replies = ['Home Cleaning','Office Cleaning','Post-Renovation','Cafe / Restaurant','Shops','Neglected Property']
+        .map(v => ({ label: v, onClick: () => this.pick({ service: v }, v, ['How many cleaners would you prefer?'], 'cleaners') }));
+    } else if (step === 'cleaners') {
+      replies = ['1 Cleaner','2 Cleaners','Not Sure']
+        .map(v => ({ label: v, onClick: () => this.pick({ cleaners: v }, v, ['How long do you need the cleaning service?'], 'duration') }));
+    } else if (step === 'duration') {
+      replies = ['1 Hour','2 Hours','4 Hours','8 Hours']
+        .map(v => ({ label: v, onClick: () => this.pick({ duration: v }, v, ['Perfect! Just a few details and I\'ll prepare your summary. 📝'], 'details') }));
+    }
+
+    const dt = [b.date, b.time].filter(Boolean).join(', ');
+    const msg = 'Hi Golden Cleaning Services, I would like to book a cleaning service.\n\n'
+      + 'Service: ' + (b.service || '-') + '\n'
+      + 'Cleaners: ' + (b.cleaners || '-') + '\n'
+      + 'Duration: ' + (b.duration || '-') + '\n'
+      + 'Date/Time: ' + (dt || '-') + '\n'
+      + 'Location: ' + (b.location || '-') + '\n'
+      + 'Name: ' + (b.name || '-') + '\n'
+      + 'Phone: ' + (b.phone || '-');
+    const waLink = 'https://wa.me/60189759983?text=' + encodeURIComponent(msg);
+    const waAsk = 'https://wa.me/60189759983?text=' + encodeURIComponent('Hi Golden Cleaning Services, I have a question. 😊');
+
+    const formValid = !!(b.date && b.time && b.location && b.name && b.phone);
+    const reviewStyle = 'width:100%;border:none;border-radius:12px;padding:12px;font-family:Poppins,sans-serif;font-weight:800;font-size:14.5px;margin-top:2px;'
+      + (formValid ? 'background:#0e3a46;color:#fff;cursor:pointer;' : 'background:#cbd8dc;color:#f4f8f9;cursor:not-allowed;');
+
+    return {
+      chatOpen: s.chatOpen,
+      chatClosed: !s.chatOpen,
+      chatRef: this.chatRef,
+      chatMessages: messages,
+      chatReplies: replies,
+      showChatReplies: replies.length > 0,
+      showChatForm: step === 'details',
+      showChatSummary: step === 'summary',
+      showChatWaOnly: step === 'question',
+      showChatReset: step !== 'intro',
+      showResetConfirm: s.confirmReset,
+      askReset: () => this.setState({ confirmReset: true }),
+      cancelReset: () => this.setState({ confirmReset: false }),
+      chatWaLink: waLink,
+      chatWaAsk: waAsk,
+      booking: b,
+      reviewStyle: reviewStyle,
+      reviewBooking: () => this.reviewBooking(),
+      resetChat: () => this.resetChat(),
+      openChat: () => this.setState({ chatOpen: true }),
+      toggleChat: () => this.setState(st => ({ chatOpen: !st.chatOpen })),
+      closeChat: () => this.setState({ chatOpen: false }),
+      sumService: b.service || '—',
+      sumCleaners: b.cleaners || '—',
+      sumDuration: b.duration || '—',
+      sumDT: dt || '—',
+      sumLocation: b.location || '—',
+      sumName: b.name || '—',
+      sumPhone: b.phone || '—',
+      onDate: (e) => this.setField('date', e.target.value),
+      onTime: (e) => this.setField('time', e.target.value),
+      onLocation: (e) => this.setField('location', e.target.value),
+      onName: (e) => this.setField('name', e.target.value),
+      onPhone: (e) => this.setField('phone', e.target.value),
+    };
+  }
+
+  renderVals() {
+    const plan = this.state.plan;
+    const isBasic = plan === 'basic';
+
+    const basicRows = [
+      { dur: '1 Hour', c1: 'RM50', c2: 'RM70' },
+      { dur: '2 Hours', c1: 'RM70', c2: 'RM100' },
+      { dur: '4 Hours', c1: '—', c2: 'RM150' },
+      { dur: '8 Hours', c1: 'RM100', c2: 'RM320' },
+    ];
+    const monthlyRows = [
+      { dur: '1 Hour', c1: 'RM50', c2: 'RM70' },
+      { dur: '2 Hours', c1: 'RM70', c2: 'RM95' },
+      { dur: '4 Hours', c1: '—', c2: 'RM140' },
+      { dur: '8 Hours', c1: 'RM95', c2: 'RM300' },
+    ];
+
+    const activeTab = 'padding:11px 26px;border:none;border-radius:999px;font-family:Poppins,sans-serif;font-weight:700;font-size:14.5px;cursor:pointer;background:#0e3a46;color:#fff;box-shadow:0 6px 16px rgba(14,58,70,0.22)';
+    const idleTab = 'padding:11px 26px;border:none;border-radius:999px;font-family:Poppins,sans-serif;font-weight:700;font-size:14.5px;cursor:pointer;background:transparent;color:#5a6b70';
+
+    return {
+      ...this.chatVals(),
+      menuOpen: this.state.menuOpen,
+      toggleMenu: () => this.setState(st => ({ menuOpen: !st.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      trustPoints: [
+        { icon: '🧹', label: 'Professional Cleaning Team' },
+        { icon: '📍', label: 'Reliable Local Service' },
+        { icon: '📅', label: 'Flexible Scheduling' },
+        { icon: '✨', label: 'Quality Cleaning Results' },
+      ],
+      services: [
+        { icon: '🧹', bg: '#eaf6fb', title: 'Sweeping, Mopping & Vacuuming', desc: 'Thorough floor care that keeps every room fresh, dust-free and spotless.' },
+        { icon: '🧽', bg: '#fef6e0', title: 'Wiping Surfaces & Dusting', desc: 'Countertops, shelves and surfaces wiped down and dusted top to bottom.' },
+        { icon: '🚽', bg: '#e9f7ee', title: 'Bathroom & Toilet Cleaning', desc: 'Sanitised, sparkling bathrooms and toilets you can actually feel good about.' },
+        { icon: '🗑️', bg: '#eaf6fb', title: 'Rubbish Disposal', desc: 'Bins emptied and rubbish cleared so your space stays clean and tidy.' },
+        { icon: '🛠️', bg: '#fef6e0', title: 'Post-Renovation Cleaning', desc: 'Dust, debris and mess after renovation handled. Priced by quotation.' },
+        { icon: '🔁', bg: '#e9f7ee', title: 'Routine Maintenance', desc: 'Essential everyday cleaning on a schedule that fits your home or business.' },
+      ],
+      spaces: [
+        { icon: '🏠', label: 'Homes' },
+        { icon: '🏢', label: 'Offices' },
+        { icon: '🛍️', label: 'Shops' },
+        { icon: '☕', label: 'Cafés / Restaurants' },
+        { icon: '🔨', label: 'Post-Reno' },
+        { icon: '🧯', label: 'Neglected Properties' },
+      ],
+      reasons: [
+        { icon: '🤝', title: 'Trusted & Reliable', desc: 'A dependable local team that shows up and does the job right.' },
+        { icon: '⭐', title: 'Quality Results', desc: 'Careful, detailed cleaning that leaves every space genuinely spotless.' },
+        { icon: '💰', title: 'Best Prices in Town', desc: 'Honest, transparent rates, with monthly packages for extra savings.' },
+        { icon: '🧴', title: 'Free Tools & Detergents', desc: 'Cleaning equipment and detergents provided free of charge on request.' },
+      ],
+      priceRows: isBasic ? basicRows : monthlyRows,
+      priceNote: isBasic
+        ? 'One of the best prices in town! Post-renovation prices vary, so please request a quotation.'
+        : 'Monthly rate applies to subscribers only (minimum 4 sessions per month, within 4 consecutive weeks).',
+      basicBtnStyle: isBasic ? activeTab : idleTab,
+      monthlyBtnStyle: isBasic ? idleTab : activeTab,
+      setBasic: () => this.setState({ plan: 'basic' }),
+      setMonthly: () => this.setState({ plan: 'monthly' }),
+      steps: [
+        { n: '1', icon: '💬', title: 'Request a Quote', desc: 'Message us on WhatsApp or call with your space and needs.' },
+        { n: '2', icon: '🧾', title: 'Choose Your Service', desc: 'Pick per-session or a money-saving monthly package.' },
+        { n: '3', icon: '📅', title: 'Schedule Cleaning', desc: 'Lock in a date and time that works for you, 8 AM to 7 PM daily.' },
+        { n: '4', icon: '✨', title: 'Enjoy a Clean Space', desc: 'Relax while our team makes everything spotless.' },
+      ],
+      reviews: [
+        'assets/review-01.jpg', 'assets/review-07.jpg', 'assets/review-06.jpg',
+        'assets/review-02.jpg', 'assets/review-08.jpg', 'assets/review-05.jpg',
+        'assets/review-03.jpg', 'assets/review-09.jpg', 'assets/review-10.jpg',
+        'assets/review-04.jpg',
+      ],
+      confidence: [
+        { stat: '6+', label: 'Types of spaces we clean' },
+        { stat: '10 KM', label: 'Free transport radius from Pending' },
+        { stat: '7 days', label: 'Open every day of the week' },
+        { stat: '100%', label: 'Committed to quality results' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>
