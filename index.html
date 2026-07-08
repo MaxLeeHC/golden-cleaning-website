@@ -42,9 +42,25 @@
     .gcs-bookmin { padding: 32px 22px !important; }
     .gcs-phone { width: 100% !important; max-width: 300px !important; }
   }
+  /* ---- header, small phones ---- */
+  @media (max-width: 480px) {
+    header > div:first-child { padding: 10px 14px !important; gap: 8px !important; }
+    .gcs-logo-link { gap: 8px !important; }
+    .gcs-logo-img { width: 34px !important; height: 34px !important; }
+    .gcs-logo-text { font-size: 14.5px !important; }
+    .gcs-logo-text .gcs-logo-sub { font-size: 10.5px !important; }
+    .gcs-header-cta { padding: 8px 12px !important; gap: 6px !important; }
+    .gcs-header-cta .gcs-cta-full { display: none !important; }
+    .gcs-header-cta .gcs-cta-short { display: inline !important; }
+    .gcs-burger { width: 38px !important; height: 38px !important; }
+  }
+  @media (max-width: 340px) {
+    .gcs-logo-text { font-size: 13px !important; }
+    .gcs-header-cta .gcs-cta-dot { display: none !important; }
+  }
   @media (max-width: 860px) {
     .gcs-herowrap { min-height: auto !important; }
-    .gcs-hero-bg, .gcs-hero-scrim { display: none !important; }
+    .gcs-hero-bg, .gcs-hero-scrim, .gcs-hero-bottom-fade { display: none !important; }
     .gcs-hero-img { display: block !important; }
     .gcs-hero-text { max-width: 640px !important; }
   }
@@ -68,9 +84,12 @@
     .gcs-steps { grid-template-columns: 1fr !important; }
     .gcs-trust { grid-template-columns: 1fr !important; }
     .gcs-conf { grid-template-columns: 1fr 1fr !important; }
-    .gcs-gallery { grid-template-columns: 1fr !important; grid-auto-rows: auto !important; gap: 18px !important; }
-    .gcs-gallery > * { grid-column: 1 / -1 !important; grid-row: auto !important; min-height: 242px !important; aspect-ratio: 4 / 3 !important; }
-    .gcs-gallery > a { min-height: 220px !important; aspect-ratio: auto !important; }
+    .gcs-gallery { grid-template-columns: 1fr 1fr !important; grid-auto-rows: auto !important; gap: 12px !important; }
+    .gcs-gallery > * { grid-row: auto !important; }
+    .gcs-gallery > *:nth-child(1), .gcs-gallery > *:nth-child(4) { grid-column: 1 / -1 !important; aspect-ratio: 16 / 10 !important; }
+    .gcs-gallery > *:nth-child(2), .gcs-gallery > *:nth-child(3),
+    .gcs-gallery > *:nth-child(5), .gcs-gallery > *:nth-child(6) { aspect-ratio: 1 / 1 !important; }
+    .gcs-gallery > a { grid-column: 1 / -1 !important; aspect-ratio: auto !important; min-height: 170px !important; padding: 20px !important; }
     .gcs-footer { grid-template-columns: 1fr !important; gap: 30px !important; }
     .gcs-testi { column-count: 1 !important; }
     .gcs-bookmin { padding: 34px 22px !important; border-radius: 24px !important; gap: 30px !important; overflow: hidden !important; }
@@ -79,12 +98,13 @@
     .gcs-header-cta { padding: 10px 15px !important; font-size: 13px !important; }
     .gcs-price-head > div, .gcs-price-row > div { padding-left: 12px !important; padding-right: 12px !important; }
   }
+  @media (max-width: 480px) {
+    .gcs-header-cta { padding: 8px 12px !important; font-size: 12.5px !important; }
+  }
   @media (max-width: 400px) {
     .gcs-hero h1 { font-size: 30px !important; }
     .gcs-h2 { font-size: 25px !important; }
-    .gcs-header-cta { display: none !important; }
     .gcs-conf { grid-template-columns: 1fr !important; }
-    .gcs-gallery { grid-template-columns: 1fr !important; }
     .gcs-price-head > div, .gcs-price-row > div { padding-left: 9px !important; padding-right: 9px !important; font-size: 14px !important; }
   }
   .gcs-chat-popup { width: 378px; }
@@ -102,9 +122,9 @@
 <!-- ============ HEADER ============ -->
 <header style="position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.88);backdrop-filter:blur(12px);border-bottom:1px solid #e8eff1">
   <div style="max-width:1180px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px">
-    <a href="#top" style="display:flex;align-items:center;gap:12px">
-      <img src="assets/logo.jpg" alt="Golden Cleaning Services" style="width:48px;height:48px;border-radius:12px;object-fit:cover;box-shadow:0 4px 14px rgba(14,58,70,0.18)">
-      <span style="font-family:'Poppins',sans-serif;font-weight:700;font-size:17px;color:#0e3a46;line-height:1.1">Golden Cleaning<br><span style="font-weight:600;font-size:13px;color:#e3ad0c;letter-spacing:1.5px">SERVICES</span></span>
+    <a href="#top" class="gcs-logo-link" style="display:flex;align-items:center;gap:12px;min-width:0;flex-shrink:1">
+      <img src="assets/logo.jpg" alt="Golden Cleaning Services" class="gcs-logo-img" style="width:48px;height:48px;border-radius:12px;object-fit:cover;box-shadow:0 4px 14px rgba(14,58,70,0.18);flex-shrink:0">
+      <span class="gcs-logo-text" style="font-family:'Poppins',sans-serif;font-weight:700;font-size:17px;color:#0e3a46;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Golden Cleaning<br><span class="gcs-logo-sub" style="font-weight:600;font-size:13px;color:#e3ad0c;letter-spacing:1.5px">SERVICES</span></span>
     </a>
     <nav style="display:flex;align-items:center;gap:30px;font-weight:600;font-size:15px" class="gcs-nav">
       <a href="#services" style="color:#2c3f44">Services</a>
@@ -113,9 +133,9 @@
       <a href="#process" style="color:#2c3f44">How It Works</a>
       <a href="#gallery" style="color:#2c3f44">Gallery</a>
     </nav>
-    <div style="display:flex;align-items:center;gap:12px">
-      <a href="https://GCSkuching.wasap.my" target="_blank" class="gcs-header-cta" style="display:inline-flex;align-items:center;gap:8px;background:#0e3a46;color:#fff;padding:11px 20px;border-radius:999px;font-weight:700;font-size:14px;box-shadow:0 6px 18px rgba(14,58,70,0.22)" style-hover="background:#134e5e;transform:translateY(-1px)">
-        <span style="width:8px;height:8px;border-radius:50%;background:#f4c430;display:inline-block"></span>Get Free Quote
+    <div style="display:flex;align-items:center;gap:12px;flex-shrink:0">
+      <a href="https://GCSkuching.wasap.my" target="_blank" class="gcs-header-cta" style="display:inline-flex;align-items:center;gap:8px;background:#0e3a46;color:#fff;padding:11px 20px;border-radius:999px;font-weight:700;font-size:14px;box-shadow:0 6px 18px rgba(14,58,70,0.22);white-space:nowrap" style-hover="background:#134e5e;transform:translateY(-1px)">
+        <span class="gcs-cta-dot" style="width:8px;height:8px;border-radius:50%;background:#f4c430;display:inline-block;flex-shrink:0"></span><span class="gcs-cta-full">Get Free Quote</span><span class="gcs-cta-short" style="display:none">Quote</span>
       </a>
       <button onClick="{{ toggleMenu }}" aria-label="Menu" class="gcs-burger" style="display:none;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;border:1px solid #e3edf0;background:#fff;cursor:pointer;flex-shrink:0">
         <span style="display:flex;flex-direction:column;gap:4px"><span style="width:20px;height:2.5px;background:#0e3a46;border-radius:2px"></span><span style="width:20px;height:2.5px;background:#0e3a46;border-radius:2px"></span><span style="width:20px;height:2.5px;background:#0e3a46;border-radius:2px"></span></span>
@@ -139,8 +159,9 @@
 
 <!-- ============ HERO ============ -->
 <section class="gcs-herowrap" style="position:relative;overflow:hidden;background:#fff;min-height:660px;display:flex;align-items:center">
-  <div class="gcs-hero-bg" style="position:absolute;inset:0;background-image:url('assets/hero.png');background-repeat:no-repeat;background-position:right top;background-size:contain"></div>
+  <div class="gcs-hero-bg" style="position:absolute;inset:0;background-image:url('assets/hero.png');background-repeat:no-repeat;background-position:right 20%;background-size:cover"></div>
   <div class="gcs-hero-scrim" style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,0.98) 0%,rgba(255,255,255,0.95) 34%,rgba(255,255,255,0.55) 52%,rgba(255,255,255,0) 70%)"></div>
+  <div class="gcs-hero-bottom-fade" style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,0) 88%,rgba(255,255,255,0.7) 96%,#fff 100%);pointer-events:none"></div>
   <div style="position:relative;width:100%;max-width:1180px;margin:0 auto;padding:64px 24px" class="gcs-hero">
     <div class="gcs-hero-text" style="max-width:560px;animation:fadeUp 0.7s ease both">
       <div style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid #e3edf0;padding:7px 15px;border-radius:999px;font-weight:700;font-size:13px;color:#0e7ea8;box-shadow:0 4px 14px rgba(14,58,70,0.06);margin-bottom:22px">
